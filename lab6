@@ -1,0 +1,34 @@
+use company;
+create table N_rollcall(n_id int(20) primary key, n_name varchar(20),n_bdate date);
+create table O_rollcall(o_id int(20) primary key, o_name varchar(20),o_bdate date);
+insert into N_rollcall values (101,'a','2005-10-07'),(102,'b','1981-06-05'),(103,'c','2008-05-07'),(104,'d','2005-02-17'),(105,'e','2005-10-16');
+insert into O_rollcall values (101,'a','2005-10-07'),(104,'d','2005-02-17');
+select * from N_rollcall;
+select * from O_rollcall;
+
+Delimiter //
+create procedure Merge_rollcall()
+begin
+Declare done int default false;
+Declare id int(20);
+Declare name varchar(25);
+Declare birthdate date;
+Declare n_cursor cursor for
+select n_id,n_name,n_bdate from N_rollcall;
+Declare continue handler for not found
+set done =true;
+open n_cursor;
+cursor_loop:LOOP
+Fetch n_cursor into id,name,birthdate;
+if done then leave cursor_loop;
+end if;
+if not exists (select 1 from O_rollcall where o_id=id)
+then 
+insert into O_rollcall (o_id,o_name,o_bdate) values (id,name,birthdate);
+end if;
+end loop;
+close n_cursor;
+end //
+Delimiter ;
+call Merge_rollcall();
+select * from O_rollcall;
