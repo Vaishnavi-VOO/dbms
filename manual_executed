@@ -1,0 +1,186 @@
+> use exam
+< switched to db exam
+> db.myCollection. insertOne({
+emp_id: 101,
+name: "Alice",
+age: 30,
+department: "HR",
+salary: 50000
+V
+acknowledged: true,
+insertedId: ObjectId('682bcc1a15c9fa923cf1ecdc')
+
+> db.exam. insertOne({ $all. insertOne({
+emp_id: 101,
+name: "Alice",
+age: 30,
+department: "HR",
+salary: 50000
+
+SyntaxError: Unexpected token, expected "," (1:24)
+use myDatabase
+< switched to db myDatabase
+> show dbs
+< Company_DB
+116.00 KiB
+
+admin
+
+40.00 KiB
+
+config
+
+116.00 KiB
+
+exam
+
+40.00 KiB
+
+local
+
+88.00 KiB
+
+myDatabase
+
+72.00 KiB
+
+> use exam
+< switched to db exam
+> sho
+« ReferenceError: sho is not defined
+> show c
+MongoshInvalidInputError: [COMMON-10001] 'c' is not a valid
+> show collections
+< myCollection
+> db. employees. insertOne ({
+emp_id: 101,
+name: "Alice",
+age: 30,
+department: "HR",
+salary: 50000
+acknowledged: true,
+insertedId: ObjectId('682bcdefcb5b05eed4fdb340')
+
+> db. employees. insertMany ( [
+{ emp_id: 102, name: "Bob", age: 28, department: "Engineering", salary: 60000 },
+{ emp_id: 103, name: "Charlie", age: 35, department: "Sales", salary: 55000 },
+{ emp_id: 104, name: "Diana", age: 26, department: "Engineering", salary: 62000 }
+1)
+
+acknowledged: true,
+insertedIds: {
+'0': ObjectId('682bce24cb5b05eed4fdb341'),
+'1': ObjectId('682bce24cb5b05eed4fdb342'),
+'2': ObjectId('682bce24cb5b05eed4fdb343')
+
+> db.employees. find()
+
+_id: ObjectId('682bcdefcb5b05eed4fdb340'),
+emp_id: 101,
+name: 'Alice',
+age: 30,
+department: 'HR',
+salary: 50000
+acknowledged: true,
+insertedId: ObjectId('682bcdefcb5b05eed4fdb340')
+
+> db. employees. insertMany ( [
+{ emp_id: 102, name: "Bob", age: 28, department: "Engineering", salary: 60000 },
+{ emp_id: 103, name: "Charlie", age: 35, department: "Sales", salary: 55000 },
+{ emp_id: 104, name: "Diana", age: 26, department: "Engineering", salary: 62000 }
+1)
+
+acknowledged: true,
+insertedIds: {
+'0': ObjectId('682bce24cb5b05eed4fdb341'),
+'1': ObjectId('682bce24cb5b05eed4fdb342'),
+'2': ObjectId('682bce24cb5b05eed4fdb343')
+
+> db.employees. find()
+
+_id: ObjectId('682bcdefcb5b05eed4fdb340'),
+emp_id: 101,
+name: 'Alice',
+age: 30,
+department: 'HR',
+salary: 50000
+_id: ObjectId('682bce24cb5b05eed4fdb343'),
+emp_id: 104,
+name: 'Diana',
+age: 26,
+department: 'Engineering',
+salary: 62000
+
+> db.employees. find({ department: "Engineering" })
+_id: ObjectId('682bce24cb5b05eed4fdb341'),
+emp_id: 102,
+name: 'Bob',
+age: 28,
+department: 'Engineering',
+salary: 60000
+
+_id: ObjectId('682bce24cb5b05eed4fdb343'),
+emp_id: 104,
+name: 'Diana',
+age: 26,
+department: 'Engineering',
+salary: 62000
+db.employees. findOne({ emp_id: 102 })
+
+_id: ObjectId('682bce24cb5b05eed4fdb341'),
+emp_id: 102,
+name: 'Bob',
+age: 28,
+department: 'Engineering',
+salary: 60000
+
+exam >db. employees.updateOne(
+{ emp_id: 101 },
+{ $set: { salary: 52000 } }
+)
+
+V
+
+acknowledged: true,
+insertedId: null,
+matchedCount: 1,
+modifiedCount: 1,
+upsertedCount: 0
+
+> db. employees.updateMany(
+{ department: "Engineering" },
+{ $inc: { salary: 2000 } }
+)
+
+acknowledged: true,
+insertedId: null,
+matchedCount: 2,
+modifiedCount: 2,
+upsertedCount: 0
+
+exam>|
+modifiedCount: 1,
+upsertedCount: 0
+
+> db. employees.updateMany (
+{ department: "Engineering" },
+{ $inc: { salary: 2000 } }
+)
+
+acknowledged: true,
+insertedId: null,
+matchedCount: 2,
+modifiedCount: 2,
+upsertedCount: 0
+
+> db.employees.deleteOne({ emp_id: 103 })
+
+acknowledged: true,
+deletedCount: 1
+
+> db.employees. deleteMany({ department: "Sales" })
+
+acknowledged: true,
+deletedCount: 0
+
+exam>
