@@ -1,0 +1,30 @@
+select user,host from mysql.user;
+create user '23cs180'@'localhost' identified by '#Vaish1033';
+grant all privileges on *.* to '23cs180'@'localhost' with grant option;
+
+create database company;
+show databases;
+use company;
+
+create table employee(eno int(20) primary key, ename varchar(20),job varchar(20),mgr_no int(20),sal decimal(10,2),commission decimal(10,2));
+desc employee;
+show tables;
+
+insert into employee(eno,ename,job,mgr_no,sal,commission) values (101,'a','ceo',1,200000,5),(102,'b','hr',2,100000,4),(103,'c','developer',1,20000,2);
+select * from employee;
+
+start transaction;
+set autocommit=0;
+insert into employee values(104,'d','analyst',2,100000,2);
+select * from employee;
+
+rollback;
+select * from employee;
+
+alter table employee modify ename varchar(20) not null,modify job varchar(20) not null,modify mgr_no int(20) not null,modify sal decimal(10,2) not null,modify commission decimal(10,2) not null;
+insert into employee values(105,'e','accountant',10000,1);
+
+
+
+
+
