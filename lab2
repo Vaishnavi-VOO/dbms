@@ -1,0 +1,17 @@
+use company;
+
+create table employee1(eno int(20) primary key, ename varchar(20),job varchar(20),mgr_no varchar(20),sal decimal(10,2));
+desc employee1;
+alter table employee1 add column commission decimal(10,2);
+
+insert into employee1(eno,ename,job,mgr_no,sal,commission) values (101,'a','ceo','m1',200000,5),(102,'b','hr','m2',100000,4),(103,'c','developer','m1',20000,2),(104,'d','analyst','m2',100000,2),(105,'e','accountant','m2',100000,2);
+select * from employee1;
+
+update employee1 set job='trainee' where eno=105;
+select * from employee1;
+alter table employee1 rename column sal to salary;
+desc employee1;
+
+delete from employee1 where eno=105;
+select * from employee1;
+
