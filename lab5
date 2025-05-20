@@ -1,0 +1,28 @@
+use company;
+create table employee3(id int(20) primary key, name varchar(20),age int (20),sal decimal(10,2));
+desc employee3;
+insert into employee3(id,name,age,sal) values (101,'a',20,200000),(102,'b',25,100000),(103,'c',28,20000),(104,'d',26,100000),(105,'e',24,25000);
+select * from employee3;
+
+Delimiter //
+create procedure Fetch_emp_data()
+begin
+Declare eno int(20);
+Declare ename varchar(20);
+Declare eage int(20);
+Declare esal decimal(10,2);
+Declare e_cursor cursor for
+select id,name,age,sal from employee3;
+Declare continue handler for not found
+set @finished=1;
+open e_cursor;
+cursor_loop:LOOP
+Fetch e_cursor into eno,ename,eage,esal;
+if @finished =1 then leave cursor_loop;
+end if;
+select concat("employee id:",eno,"Name:",ename,"age:",eage,"salary :",esal) as emp_info;
+end loop;
+close e_cursor;
+end //
+Delimiter ;
+call Fetch_emp_data();
