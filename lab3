@@ -1,0 +1,18 @@
+use company;
+
+create table employee2(id int(20) primary key, name varchar(20),age int (20),sal decimal(10,2));
+desc employee2;
+
+insert into employee2(id,name,age,sal) values (101,'a',20,200000),(102,'b',25,100000),(103,'c',28,20000),(104,'d',26,100000);
+select * from employee2;
+
+select count(name) as Total_employees from employee2;
+select max(sal) as max_sal from employee2;
+select min(sal) as min_sal from employee2;
+select name,sal from employee2 order by sal asc;
+select sal,count(*) as emp_count from employee2 group by sal ;
+
+
+
+
+
